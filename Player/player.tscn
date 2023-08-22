@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://dg2jyrvom6hsb"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_2bcd7"]
+[ext_resource type="Script" path="res://Player/movement.gd" id="2_jj24e"]
+[ext_resource type="Texture2D" uid="uid://nfic8at0pct0" path="res://Assets/soldier1_stand.png" id="3_tknfx"]
+[ext_resource type="PackedScene" uid="uid://cnfofv55x7sxp" path="res://HitDetection/hitbox_component.tscn" id="4_2p8pi"]
+[ext_resource type="PackedScene" uid="uid://dv2ewhrgj5tcq" path="res://Balance/balance.tscn" id="4_pclcl"]
+[ext_resource type="Shape2D" uid="uid://5cbyyy80eguh" path="res://Player/player_collision.tres" id="5_8pbsp"]
+[ext_resource type="PackedScene" uid="uid://b2b0lsv8llmqf" path="res://Player/health.tscn" id="5_mhjiv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dyo22"]
+radius = 26.5
+
+[node name="Player" type="Node2D" node_paths=PackedStringArray("movement_component", "balance_component", "health_component")]
+script = ExtResource("1_2bcd7")
+movement_component = NodePath("Movement Component")
+balance_component = NodePath("Balance Component")
+health_component = NodePath("Health Component")
+
+[node name="Movement Component" type="CharacterBody2D" parent="."]
+motion_mode = 1
+script = ExtResource("2_jj24e")
+move_speed = 300.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Movement Component"]
+scale = Vector2(1.175, 1.175)
+texture = ExtResource("3_tknfx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Movement Component"]
+shape = ExtResource("5_8pbsp")
+
+[node name="Hitbox Component" parent="Movement Component" node_paths=PackedStringArray("health_component") instance=ExtResource("4_2p8pi")]
+collision_layer = 2
+collision_mask = 5
+priority = 1.0
+health_component = NodePath("../../Health Component")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Movement Component/Hitbox Component"]
+shape = SubResource("CircleShape2D_dyo22")
+
+[node name="Balance Component" parent="." instance=ExtResource("4_pclcl")]
+
+[node name="Health Component" parent="." instance=ExtResource("5_mhjiv")]
+
+[connection signal="points_changed" from="Balance Component" to="." method="pointsChanged"]
+[connection signal="dead" from="Health Component" to="." method="playerDied"]

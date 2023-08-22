@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://c63ft8u2cyfsh"]
+
+[ext_resource type="Script" path="res://Enemy/enemy.gd" id="1_5da3m"]
+[ext_resource type="Script" path="res://Enemy/ai.gd" id="2_aasme"]
+[ext_resource type="Texture2D" uid="uid://bdbhqo57b2xbr" path="res://Assets/zoimbie1_hold.png" id="3_ko7td"]
+[ext_resource type="PackedScene" uid="uid://b2b0lsv8llmqf" path="res://Player/health.tscn" id="4_06tp3"]
+[ext_resource type="Shape2D" uid="uid://5cbyyy80eguh" path="res://Player/player_collision.tres" id="4_j18hg"]
+[ext_resource type="PackedScene" uid="uid://cnfofv55x7sxp" path="res://HitDetection/hitbox_component.tscn" id="5_vfcv0"]
+[ext_resource type="PackedScene" uid="uid://d1f1rp4k5t7yw" path="res://HitDetection/hurtbox_component.tscn" id="7_1v3ta"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_utjrl"]
+radius = 26.5
+
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("ai_component")]
+script = ExtResource("1_5da3m")
+ai_component = NodePath("AI Component")
+
+[node name="AI Component" type="CharacterBody2D" parent="."]
+motion_mode = 1
+script = ExtResource("2_aasme")
+move_speed = 250.0
+
+[node name="Sprite2D" type="Sprite2D" parent="AI Component"]
+scale = Vector2(1.175, 1.175)
+texture = ExtResource("3_ko7td")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AI Component"]
+shape = ExtResource("4_j18hg")
+
+[node name="Hurtbox Component" parent="AI Component" instance=ExtResource("7_1v3ta")]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="AI Component/Hurtbox Component"]
+shape = SubResource("CircleShape2D_utjrl")
+
+[node name="Hitbox Component" parent="AI Component" node_paths=PackedStringArray("health_component") instance=ExtResource("5_vfcv0")]
+collision_layer = 4
+collision_mask = 11
+health_component = NodePath("../../Health Component")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="AI Component/Hitbox Component"]
+shape = ExtResource("4_j18hg")
+
+[node name="Health Component" parent="." instance=ExtResource("4_06tp3")]
+
+[connection signal="dead" from="Health Component" to="." method="death"]
