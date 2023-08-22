@@ -4,7 +4,15 @@ extends Node2D
 @export var projectile_speed : float = 1000.0
 @export var max_travel_distance : float = 1000.0
 
+@export_category("Sound")
+@export var stream : AudioStream
+
 var distance_traveled : float = 0.0
+
+
+func _ready():
+	AudioManager.playRandomPitch(stream, 1.0, 1.3)
+
 
 func _physics_process(delta):
 	var new_pos : Vector2 = transform.x * projectile_speed * delta

@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dlkwwiv5xnsh3"]
+[gd_scene load_steps=10 format=3 uid="uid://dlkwwiv5xnsh3"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_sokne"]
 [ext_resource type="PackedScene" uid="uid://dg2jyrvom6hsb" path="res://Player/player.tscn" id="2_4cxbi"]
 [ext_resource type="PackedScene" uid="uid://ek8d1dsq0p2r" path="res://Map/map.tscn" id="2_oj67l"]
+[ext_resource type="Script" path="res://Audio/audio_manager.gd" id="2_p6xsu"]
 [ext_resource type="PackedScene" uid="uid://klem43juy0la" path="res://Player/player_camera.tscn" id="3_3w5r2"]
 [ext_resource type="PackedScene" uid="uid://4uh8ju6bm0bs" path="res://HUD/hud.tscn" id="5_3uvwg"]
 [ext_resource type="PackedScene" uid="uid://c7jyxx5l3urm6" path="res://Enemy/wave_manager.tscn" id="5_8uh0m"]
@@ -14,6 +15,9 @@ script = ExtResource("1_sokne")
 wave_manager = NodePath("Wave Manager")
 hud = NodePath("PlayerCamera/HUD")
 game_over = NodePath("PlayerCamera/GameOver")
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("2_p6xsu")
 
 [node name="Map" parent="." instance=ExtResource("2_oj67l")]
 
@@ -68,8 +72,8 @@ player = NodePath("../../Player")
 [connection signal="player_died" from="Player" to="." method="showGameOver"]
 [connection signal="points_changed" from="Player" to="PlayerCamera/HUD" method="setPointsLabel"]
 [connection signal="points_changed" from="Player" to="PlayerCamera/GameOver" method="setPointsLabel"]
-[connection signal="new_game" from="PlayerCamera/GameOver" to="." method="startGame"]
 [connection signal="new_game" from="PlayerCamera/GameOver" to="." method="hideGameOver"]
+[connection signal="new_game" from="PlayerCamera/GameOver" to="." method="startGame"]
 [connection signal="wave_changed" from="Wave Manager" to="PlayerCamera/HUD" method="setWaveLabel"]
 [connection signal="wave_changed" from="Wave Manager" to="PlayerCamera/GameOver" method="setWaveLabel"]
 [connection signal="enemy_spawned" from="Wave Manager/EnemySpawner" to="Wave Manager" method="enemySpawned"]
