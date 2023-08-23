@@ -1,12 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://c63ft8u2cyfsh"]
+[gd_scene load_steps=10 format=3 uid="uid://dj1ku83uj62hu"]
 
 [ext_resource type="Script" path="res://Enemy/enemy.gd" id="1_5da3m"]
 [ext_resource type="Script" path="res://Enemy/ai.gd" id="2_aasme"]
 [ext_resource type="Texture2D" uid="uid://bdbhqo57b2xbr" path="res://Assets/zoimbie1_hold.png" id="3_ko7td"]
 [ext_resource type="PackedScene" uid="uid://b2b0lsv8llmqf" path="res://Player/health.tscn" id="4_06tp3"]
 [ext_resource type="Shape2D" uid="uid://5cbyyy80eguh" path="res://Player/player_collision.tres" id="4_j18hg"]
-[ext_resource type="PackedScene" uid="uid://cnfofv55x7sxp" path="res://HitDetection/hitbox_component.tscn" id="5_vfcv0"]
-[ext_resource type="PackedScene" uid="uid://d1f1rp4k5t7yw" path="res://HitDetection/hurtbox_component.tscn" id="7_1v3ta"]
+[ext_resource type="PackedScene" path="res://Mechanics/HitDetection/hitbox_component.tscn" id="5_vfcv0"]
+[ext_resource type="PackedScene" path="res://Mechanics/HitDetection/hurtbox_component.tscn" id="7_1v3ta"]
 [ext_resource type="AudioStream" uid="uid://ch3jdowtlt14n" path="res://Assets/SFX/splat_1.wav" id="9_qb6ew"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_utjrl"]

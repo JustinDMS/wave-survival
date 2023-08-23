@@ -8,7 +8,7 @@ signal wave_changed(wave : int)
 @onready var wave_delay = $WaveDelay
 
 const MAX_SPAWN_TIME : float = 0.25
-const MIN_SPAWN_TIME : float = 2.0
+const MIN_SPAWN_TIME : float = 0.75
 
 
 var wave : int = 0
