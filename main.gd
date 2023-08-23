@@ -21,3 +21,7 @@ func showGameOver():
 func hideGameOver():
 	hud.visible = true
 	game_over.visible = false
+
+
+func newGame():
+	get_tree().reload_current_scene()

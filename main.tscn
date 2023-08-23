@@ -73,7 +73,7 @@ player = NodePath("../../Player")
 [connection signal="points_changed" from="Player" to="PlayerCamera/HUD" method="setPointsLabel"]
 [connection signal="points_changed" from="Player" to="PlayerCamera/GameOver" method="setPointsLabel"]
 [connection signal="new_game" from="PlayerCamera/GameOver" to="." method="hideGameOver"]
-[connection signal="new_game" from="PlayerCamera/GameOver" to="." method="startGame"]
+[connection signal="new_game" from="PlayerCamera/GameOver" to="." method="newGame"]
 [connection signal="wave_changed" from="Wave Manager" to="PlayerCamera/HUD" method="setWaveLabel"]
 [connection signal="wave_changed" from="Wave Manager" to="PlayerCamera/GameOver" method="setWaveLabel"]
 [connection signal="enemy_spawned" from="Wave Manager/EnemySpawner" to="Wave Manager" method="enemySpawned"]
