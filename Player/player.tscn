@@ -1,21 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://dg2jyrvom6hsb"]
+[gd_scene load_steps=10 format=3 uid="uid://dt3jw71lqjsg7"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_2bcd7"]
 [ext_resource type="Script" path="res://Player/movement.gd" id="2_jj24e"]
 [ext_resource type="Texture2D" uid="uid://nfic8at0pct0" path="res://Assets/soldier1_stand.png" id="3_tknfx"]
-[ext_resource type="PackedScene" uid="uid://cnfofv55x7sxp" path="res://HitDetection/hitbox_component.tscn" id="4_2p8pi"]
-[ext_resource type="PackedScene" uid="uid://dv2ewhrgj5tcq" path="res://Balance/balance.tscn" id="4_pclcl"]
+[ext_resource type="PackedScene" path="res://Mechanics/HitDetection/hitbox_component.tscn" id="4_2p8pi"]
+[ext_resource type="PackedScene" uid="uid://c665dyxqr7oq7" path="res://Mechanics/Balance/balance.tscn" id="4_pclcl"]
 [ext_resource type="Shape2D" uid="uid://5cbyyy80eguh" path="res://Player/player_collision.tres" id="5_8pbsp"]
 [ext_resource type="PackedScene" uid="uid://b2b0lsv8llmqf" path="res://Player/health.tscn" id="5_mhjiv"]
+[ext_resource type="PackedScene" uid="uid://c378r6ly2dfog" path="res://Mechanics/Weapon/weapon_component.tscn" id="8_ifryy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dyo22"]
 radius = 26.5
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("movement_component", "balance_component", "health_component")]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("movement_component", "balance_component", "health_component", "weapon_component")]
 script = ExtResource("1_2bcd7")
 movement_component = NodePath("Movement Component")
 balance_component = NodePath("Balance Component")
 health_component = NodePath("Health Component")
+weapon_component = NodePath("Weapon Component")
 
 [node name="Movement Component" type="CharacterBody2D" parent="."]
 motion_mode = 1
@@ -41,6 +43,9 @@ shape = SubResource("CircleShape2D_dyo22")
 [node name="Balance Component" parent="." instance=ExtResource("4_pclcl")]
 
 [node name="Health Component" parent="." instance=ExtResource("5_mhjiv")]
+
+[node name="Weapon Component" parent="." instance=ExtResource("8_ifryy")]
+use_time = 0.25
 
 [connection signal="points_changed" from="Balance Component" to="." method="pointsChanged"]
 [connection signal="dead" from="Health Component" to="." method="playerDied"]

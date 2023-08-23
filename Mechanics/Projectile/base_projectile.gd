@@ -1,17 +1,20 @@
 class_name Projectile
 extends Node2D
 
+@export_category("Config")
 @export var projectile_speed : float = 1000.0
 @export var max_travel_distance : float = 1000.0
 
 @export_category("Sound")
 @export var stream : AudioStream
+@export var min_pitch : float = 1.0
+@export var max_pitch : float = 1.0
 
 var distance_traveled : float = 0.0
 
 
 func _ready():
-	AudioManager.playRandomPitch(stream, 1.0, 1.3)
+	playAudio()
 
 
 func _physics_process(delta):
@@ -23,5 +26,11 @@ func _physics_process(delta):
 		queue_free()
 
 
+func playAudio():
+	AudioManager.playRandomPitch(stream, min_pitch, max_pitch)
+
+
 func projectileHit(_area):
+	if _area is Hurtbox:
+		return
 	queue_free()
