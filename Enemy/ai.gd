@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 enum ai {BASE}
 
-const MAX_MOVE_SPEED_VARIANCE : float = 30.0
+const MAX_MOVE_SPEED_VARIANCE : float = 100.0
 
 func handle_movement(player : Player, _delta : float) -> void:
 	match type:

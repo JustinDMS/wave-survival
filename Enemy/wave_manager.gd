@@ -3,6 +3,7 @@ extends Node2D
 signal wave_changed(wave : int)
 
 @export var spawners : Array[Spawner]
+@export var enemy_pool : EnemyPool
 
 @onready var spawn_delay = $SpawnDelay
 @onready var wave_delay = $WaveDelay
@@ -13,6 +14,7 @@ const MIN_SPAWN_TIME : float = 0.75
 
 var wave : int = 0
 var limit : int = 1
+var pool : Array
 var enemies_spawned : int = 0
 var enemies_killed : int = 0
 
@@ -27,7 +29,7 @@ func incrementWave() -> void:
 
 
 func setEnemyLimit() -> void:
-	limit = wave * 2
+	limit = wave * 4
 
 
 func getAllSpawners() -> void:
@@ -38,7 +40,7 @@ func getAllSpawners() -> void:
 
 # Chooses a random spawner and spawns an enemy
 func sendWave() -> void:
-	spawners.pick_random().spawnEnemy()
+	spawners.pick_random().spawnEnemy(pool.pop_front())
 
 
 func incrementEnemiesSpawned() -> void:
@@ -63,11 +65,10 @@ func startWave():
 	wave_delay.start()
 
 
-# Spawns enemies until the limit is reached
+# Spawns enemies until there are no more enemies remaining
 func spawnDelayTimeout():
-	if enemies_spawned < limit:
-		sendWave()
-	else:
+	sendWave()
+	if len(pool) == 0:
 		spawn_delay.stop()
 
 
@@ -75,9 +76,14 @@ func spawnDelayTimeout():
 func waveDelayTimeout():
 	incrementWave()
 	setEnemyLimit()
-	print("Wave ", wave, " started!")
+	getEnemyPool()
 	startRandomSpawnTimer()
 
 
 func startRandomSpawnTimer() -> void:
+	print("Wave ", wave, " started!")
 	spawn_delay.start(randf_range(MIN_SPAWN_TIME, MAX_SPAWN_TIME))
+
+
+func getEnemyPool() -> void:
+	pool = enemy_pool.buildPool(wave, limit)

@@ -6,7 +6,7 @@ signal killed
 @export var player : Player
 @export var ai_component : Node2D
 
-@export var value : int = 50
+@export var value : int = 10
 
 @export_category("Sound")
 @export var stream : AudioStream

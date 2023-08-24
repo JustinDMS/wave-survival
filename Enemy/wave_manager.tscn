@@ -1,9 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7jyxx5l3urm6"]
+[gd_scene load_steps=5 format=3 uid="uid://c7jyxx5l3urm6"]
 
 [ext_resource type="Script" path="res://Enemy/wave_manager.gd" id="1_xr5h3"]
+[ext_resource type="Script" path="res://Enemy/enemy_pool.gd" id="2_f327o"]
+[ext_resource type="PackedScene" uid="uid://dj1ku83uj62hu" path="res://Enemy/enemy.tscn" id="3_rrysd"]
+[ext_resource type="PackedScene" uid="uid://b2v4so65kbbs6" path="res://Enemy/enemy_strong.tscn" id="4_ghbac"]
 
-[node name="Wave Manager" type="Node2D"]
+[node name="Wave Manager" type="Node2D" node_paths=PackedStringArray("enemy_pool")]
 script = ExtResource("1_xr5h3")
+enemy_pool = NodePath("EnemyPool")
 
 [node name="SpawnDelay" type="Timer" parent="."]
 wait_time = 2.0
@@ -11,6 +15,10 @@ wait_time = 2.0
 [node name="WaveDelay" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="EnemyPool" type="Node" parent="."]
+script = ExtResource("2_f327o")
+master_pool = Array[PackedScene]([ExtResource("3_rrysd"), ExtResource("4_ghbac")])
 
 [connection signal="timeout" from="SpawnDelay" to="." method="spawnDelayTimeout"]
 [connection signal="timeout" from="WaveDelay" to="." method="waveDelayTimeout"]

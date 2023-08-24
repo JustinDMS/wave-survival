@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="EnemyPool" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Enemy/enemy_pool.gd" id="3_7d553"]
+
+[resource]
+script = ExtResource("3_7d553")
+master_pool = Array[PackedScene]([])
