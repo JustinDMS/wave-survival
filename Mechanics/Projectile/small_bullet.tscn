@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://qq85qk0276wm"]
+
+[ext_resource type="Script" path="res://Mechanics/Projectile/base_projectile.gd" id="1_8po7y"]
+[ext_resource type="AudioStream" uid="uid://jpjcx0cwchkh" path="res://Assets/SFX/bullet_1.wav" id="2_labjy"]
+[ext_resource type="Texture2D" uid="uid://bksfd5ljgitx7" path="res://Assets/bullet.png" id="2_vbana"]
+[ext_resource type="PackedScene" path="res://Mechanics/HitDetection/hurtbox_component.tscn" id="3_o5yul"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ixlmu"]
+size = Vector2(8.949, 3.378)
+
+[node name="small_bullet" type="Node2D"]
+script = ExtResource("1_8po7y")
+projectile_speed = 3000.0
+max_travel_distance = 3000.0
+stream = ExtResource("2_labjy")
+volume_db = -8.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.015, 0.015)
+texture = ExtResource("2_vbana")
+
+[node name="Hurtbox Component" parent="." instance=ExtResource("3_o5yul")]
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox Component"]
+shape = SubResource("RectangleShape2D_ixlmu")
+
+[connection signal="area_entered" from="Hurtbox Component" to="." method="projectileHit"]

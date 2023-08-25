@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccfs67r2t7bn5"]
+
+[ext_resource type="Script" path="res://Mechanics/Weapon/weapon_component.gd" id="1_ihock"]
+[ext_resource type="PackedScene" uid="uid://qq85qk0276wm" path="res://Mechanics/Projectile/small_bullet.tscn" id="2_pcmyr"]
+[ext_resource type="PackedScene" uid="uid://csj8l62ffabdv" path="res://Mechanics/Ammo/ammo_component.tscn" id="3_e7e3w"]
+
+[node name="Pistol" type="Node2D" node_paths=PackedStringArray("ammo_component")]
+script = ExtResource("1_ihock")
+projectile = ExtResource("2_pcmyr")
+ammo_component = NodePath("Ammo Component")
+
+[node name="Cooldown" type="Timer" parent="."]
+
+[node name="Ammo Component" parent="." instance=ExtResource("3_e7e3w")]
+ammo_capacity = 32
+clip_capacity = 8
+
+[connection signal="timeout" from="Cooldown" to="." method="endCooldown"]
+[connection signal="changed" from="Ammo Component" to="." method="ammoChanged"]

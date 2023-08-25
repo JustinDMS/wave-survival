@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c665dyxqr7oq7" path="res://Mechanics/Balance/balance.tscn" id="4_pclcl"]
 [ext_resource type="Shape2D" uid="uid://5cbyyy80eguh" path="res://Player/player_collision.tres" id="5_8pbsp"]
 [ext_resource type="PackedScene" uid="uid://b2b0lsv8llmqf" path="res://Player/health.tscn" id="5_mhjiv"]
-[ext_resource type="PackedScene" uid="uid://c378r6ly2dfog" path="res://Mechanics/Weapon/weapon_component.tscn" id="8_ifryy"]
+[ext_resource type="PackedScene" uid="uid://ccfs67r2t7bn5" path="res://Mechanics/Weapon/pistol.tscn" id="8_cve46"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dyo22"]
 radius = 26.5
@@ -17,7 +17,7 @@ script = ExtResource("1_2bcd7")
 movement_component = NodePath("Movement Component")
 balance_component = NodePath("Balance Component")
 health_component = NodePath("Health Component")
-weapon_component = NodePath("Weapon Component")
+weapon_component = NodePath("Pistol")
 
 [node name="Movement Component" type="CharacterBody2D" parent="."]
 motion_mode = 1
@@ -44,8 +44,8 @@ shape = SubResource("CircleShape2D_dyo22")
 
 [node name="Health Component" parent="." instance=ExtResource("5_mhjiv")]
 
-[node name="Weapon Component" parent="." instance=ExtResource("8_ifryy")]
-use_time = 0.25
+[node name="Pistol" parent="." instance=ExtResource("8_cve46")]
 
 [connection signal="points_changed" from="Balance Component" to="." method="pointsChanged"]
 [connection signal="dead" from="Health Component" to="." method="playerDied"]
+[connection signal="ammo_changed" from="Pistol" to="." method="ammoChanged"]

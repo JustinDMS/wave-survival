@@ -9,6 +9,7 @@ extends Node2D
 @export var stream : AudioStream
 @export var min_pitch : float = 1.0
 @export var max_pitch : float = 1.0
+@export_range(-25.0, 1.0, 0.1) var volume_db = 1.0
 
 var distance_traveled : float = 0.0
 
@@ -27,7 +28,7 @@ func _physics_process(delta):
 
 
 func playAudio():
-	AudioManager.playRandomPitch(stream, min_pitch, max_pitch)
+	AudioManager.playModified(stream, min_pitch, max_pitch, volume_db)
 
 
 func projectileHit(_area):

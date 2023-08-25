@@ -78,6 +78,7 @@ player = NodePath("../../Player")
 position = Vector2(34, 549)
 player = NodePath("../../Player")
 
+[connection signal="ammo_changed" from="Player" to="PlayerCamera/HUD" method="setAmmoLabel"]
 [connection signal="player_died" from="Player" to="." method="showGameOver"]
 [connection signal="points_changed" from="Player" to="PlayerCamera/HUD" method="setPointsLabel"]
 [connection signal="points_changed" from="Player" to="PlayerCamera/GameOver" method="setPointsLabel"]
