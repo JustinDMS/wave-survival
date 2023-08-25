@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2v4so65kbbs6"]
+[gd_scene load_steps=10 format=3 uid="uid://b2v4so65kbbs6"]
 
 [ext_resource type="Script" path="res://Enemy/enemy.gd" id="1_5v2vp"]
+[ext_resource type="AudioStream" uid="uid://ch3jdowtlt14n" path="res://Assets/SFX/splat_1.wav" id="2_4qiib"]
 [ext_resource type="Script" path="res://Enemy/ai.gd" id="2_7j6ml"]
 [ext_resource type="Texture2D" uid="uid://bdbhqo57b2xbr" path="res://Assets/zoimbie1_hold.png" id="3_rsonj"]
 [ext_resource type="Shape2D" uid="uid://5cbyyy80eguh" path="res://Player/player_collision.tres" id="4_gr721"]
@@ -15,11 +16,14 @@ radius = 26.5
 script = ExtResource("1_5v2vp")
 ai_component = NodePath("AI Component")
 value = 25
+stream = ExtResource("2_4qiib")
+min_pitch = 0.5
+max_pitch = 0.75
 
 [node name="AI Component" type="CharacterBody2D" parent="."]
 motion_mode = 1
 script = ExtResource("2_7j6ml")
-move_speed = 250.0
+move_speed = 200.0
 
 [node name="Sprite2D" type="Sprite2D" parent="AI Component"]
 modulate = Color(1, 0.392157, 1, 1)

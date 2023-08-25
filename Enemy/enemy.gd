@@ -10,6 +10,8 @@ signal killed
 
 @export_category("Sound")
 @export var stream : AudioStream
+@export var min_pitch : float = 1.0
+@export var max_pitch : float = 1.0
 
 
 func _ready():
@@ -21,7 +23,7 @@ func _physics_process(delta):
 
 
 func death():
-	AudioManager.playRandomPitch(stream, 0.9, 1.0)
+	AudioManager.playModified(stream, min_pitch, max_pitch)
 	emit_signal("killed")
 	player.balance_component.handle_transaction(value)
 	queue_free()

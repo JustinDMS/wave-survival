@@ -16,6 +16,8 @@ radius = 26.5
 script = ExtResource("1_5da3m")
 ai_component = NodePath("AI Component")
 stream = ExtResource("9_qb6ew")
+min_pitch = 0.95
+max_pitch = 1.05
 
 [node name="AI Component" type="CharacterBody2D" parent="."]
 motion_mode = 1
