@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 AudioManager="*res://Audio/audio_manager.gd"
+DropManager="*res://Mechanics/Drops/drop_manager.gd"
 
 [display]
 
@@ -64,3 +65,4 @@ reload={
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="Player Attacks"
+2d_physics/layer_5="Drops"

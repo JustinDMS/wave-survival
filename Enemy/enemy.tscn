@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dj1ku83uj62hu"]
+[gd_scene load_steps=11 format=3 uid="uid://dj1ku83uj62hu"]
 
 [ext_resource type="Script" path="res://Enemy/enemy.gd" id="1_5da3m"]
 [ext_resource type="Script" path="res://Enemy/ai.gd" id="2_aasme"]
+[ext_resource type="PackedScene" uid="uid://b4dh12i4pwfc6" path="res://Mechanics/Drops/drop_component.tscn" id="2_h6f46"]
 [ext_resource type="Texture2D" uid="uid://bdbhqo57b2xbr" path="res://Assets/zoimbie1_hold.png" id="3_ko7td"]
 [ext_resource type="PackedScene" uid="uid://b2b0lsv8llmqf" path="res://Player/health.tscn" id="4_06tp3"]
 [ext_resource type="Shape2D" uid="uid://5cbyyy80eguh" path="res://Player/player_collision.tres" id="4_j18hg"]
@@ -18,6 +19,8 @@ ai_component = NodePath("AI Component")
 stream = ExtResource("9_qb6ew")
 min_pitch = 0.95
 max_pitch = 1.05
+drop = ExtResource("2_h6f46")
+chance = 25
 
 [node name="AI Component" type="CharacterBody2D" parent="."]
 motion_mode = 1

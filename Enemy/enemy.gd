@@ -13,6 +13,10 @@ signal killed
 @export var min_pitch : float = 1.0
 @export var max_pitch : float = 1.0
 
+@export_category("Drops")
+@export var drop : PackedScene
+@export_range(0, 100, 1) var chance : int = 0
+
 
 func _ready():
 	killed.connect(Callable(get_parent(), "incrementEnemiesKilled"))
@@ -24,6 +28,7 @@ func _physics_process(delta):
 
 func death():
 	AudioManager.playModified(stream, min_pitch, max_pitch)
+	DropManager.tryDrop(drop, ai_component.global_position, player)
 	emit_signal("killed")
 	player.balance_component.handle_transaction(value)
 	queue_free()

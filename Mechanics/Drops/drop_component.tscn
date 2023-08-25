@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4dh12i4pwfc6"]
+
+[ext_resource type="Texture2D" uid="uid://b3jdbq4yfixg" path="res://Assets/ammo_drop.png" id="1_401m6"]
+[ext_resource type="Script" path="res://Mechanics/Drops/drop_component.gd" id="1_cjka7"]
+[ext_resource type="Script" path="res://Mechanics/HitDetection/hitbox.gd" id="2_1uvqa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0rwln"]
+size = Vector2(31, 20)
+
+[node name="Drop Component" type="Node2D"]
+script = ExtResource("1_cjka7")
+amount = 4
+drop_chance = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("1_401m6")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("2_1uvqa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_0rwln")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

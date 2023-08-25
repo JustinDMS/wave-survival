@@ -54,6 +54,12 @@ func canFire() -> bool:
 	return false
 
 
+func ammoReceived(amount : int) -> void:
+	current_ammo += amount
+	current_ammo = clampi(current_ammo, 0, ammo_capacity)
+	ammoChanged()
+
+
 func ammoChanged() -> void:
 	emit_signal("changed", current_clip, current_ammo)
 

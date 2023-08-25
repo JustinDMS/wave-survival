@@ -25,6 +25,10 @@ func _unhandled_input(event):
 	get_viewport().set_input_as_handled()
 
 
+func addAmmo(amount : int) -> void:
+	weapon_component.ammo_component.ammoReceived(amount)
+
+
 func pointsChanged(balance):
 	emit_signal("points_changed", balance)
 
