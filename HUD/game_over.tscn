@@ -9,6 +9,7 @@ font_size = 60
 font_size = 20
 
 [node name="GameOver" type="Control" node_paths=PackedStringArray("wave_label", "points_label")]
+z_index = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,6 +28,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
+alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2

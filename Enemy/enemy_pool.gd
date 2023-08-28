@@ -52,17 +52,11 @@ func setWeightsFromWave(wave : int) -> void:
 				master_pool[0] : 100,
 				master_pool[1] : 0,
 			}
-		3, 4, 5:
-			print("Using weight for waves: 3, 4, 5")
-			new_weights = {
-				master_pool[0] : 90,
-				master_pool[1] : 10,
-			}
 		_:
-			print("Using weight for waves: >5")
+			print("Using weight for waves: >= 3")
 			new_weights = {
-				master_pool[0] : 75,
-				master_pool[1] : 25,
+				master_pool[0] : 50,
+				master_pool[1] : 50,
 			}
 	
 	weights = new_weights

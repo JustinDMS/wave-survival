@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://djj4sp6y3rrhr"]
+
+[ext_resource type="Script" path="res://Mechanics/Weapon/weapon_component.gd" id="1_n31m6"]
+[ext_resource type="PackedScene" uid="uid://csj8l62ffabdv" path="res://Mechanics/Ammo/ammo_component.tscn" id="2_3w311"]
+[ext_resource type="PackedScene" uid="uid://ddw7yy52kkd2t" path="res://Mechanics/Projectile/pellet.tscn" id="2_lhhk6"]
+
+[node name="Shotgun" type="Node2D" node_paths=PackedStringArray("ammo_component", "cooldown_timer")]
+script = ExtResource("1_n31m6")
+projectile = ExtResource("2_lhhk6")
+ammo_component = NodePath("Ammo Component")
+cooldown_timer = NodePath("Cooldown")
+use_time = 1.0
+behavior = 1
+scatter_count = 4
+scatter = 20.0
+
+[node name="Cooldown" type="Timer" parent="."]
+
+[node name="Ammo Component" parent="." instance=ExtResource("2_3w311")]
+ammo_capacity = 120
+clip_capacity = 4
+reload_time = 1.5
+
+[connection signal="timeout" from="Cooldown" to="." method="endCooldown"]
+[connection signal="changed" from="Ammo Component" to="." method="ammoChanged"]

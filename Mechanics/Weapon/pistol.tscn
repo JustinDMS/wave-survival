@@ -12,7 +12,7 @@ ammo_component = NodePath("Ammo Component")
 [node name="Cooldown" type="Timer" parent="."]
 
 [node name="Ammo Component" parent="." instance=ExtResource("3_e7e3w")]
-ammo_capacity = 32
+ammo_capacity = 72
 clip_capacity = 8
 
 [connection signal="timeout" from="Cooldown" to="." method="endCooldown"]

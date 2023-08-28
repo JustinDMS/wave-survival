@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://dlkwwiv5xnsh3"]
+[gd_scene load_steps=12 format=3 uid="uid://dlkwwiv5xnsh3"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_sokne"]
 [ext_resource type="PackedScene" uid="uid://dt3jw71lqjsg7" path="res://Player/player.tscn" id="2_4cxbi"]
 [ext_resource type="PackedScene" uid="uid://ek8d1dsq0p2r" path="res://Map/map.tscn" id="2_oj67l"]
 [ext_resource type="Script" path="res://Audio/audio_manager.gd" id="2_p6xsu"]
-[ext_resource type="PackedScene" uid="uid://klem43juy0la" path="res://Player/player_camera.tscn" id="3_3w5r2"]
+[ext_resource type="PackedScene" path="res://Player/player_camera.tscn" id="3_3w5r2"]
 [ext_resource type="Script" path="res://Mechanics/Drops/drop_manager.gd" id="3_ivxs6"]
 [ext_resource type="PackedScene" uid="uid://4uh8ju6bm0bs" path="res://HUD/hud.tscn" id="5_3uvwg"]
 [ext_resource type="PackedScene" uid="uid://c7jyxx5l3urm6" path="res://Enemy/wave_manager.tscn" id="5_8uh0m"]
 [ext_resource type="PackedScene" uid="uid://ta5nkyww40li" path="res://Enemy/enemy_spawner.tscn" id="6_m5rpl"]
 [ext_resource type="PackedScene" uid="uid://wi6sxyvsc7w8" path="res://HUD/game_over.tscn" id="8_5csj0"]
+[ext_resource type="AudioStream" uid="uid://ctqysnfx2koxp" path="res://Assets/metal-groove-90-bpm-loop-13647.mp3" id="11_uvvd8"]
 
 [node name="Main" type="Node" node_paths=PackedStringArray("wave_manager", "hud", "game_over")]
 script = ExtResource("1_sokne")
@@ -17,8 +18,14 @@ wave_manager = NodePath("Wave Manager")
 hud = NodePath("PlayerCamera/HUD")
 game_over = NodePath("PlayerCamera/GameOver")
 
-[node name="AudioManager" type="Node" parent="."]
+[node name="AudioManager" type="Node" parent="." node_paths=PackedStringArray("background_music")]
 script = ExtResource("2_p6xsu")
+background_music = NodePath("BackgroundMusic")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("11_uvvd8")
+volume_db = -20.0
+autoplay = true
 
 [node name="DropManager" type="Node" parent="."]
 script = ExtResource("3_ivxs6")
@@ -82,12 +89,13 @@ player = NodePath("../../Player")
 position = Vector2(34, 549)
 player = NodePath("../../Player")
 
+[connection signal="finished" from="AudioManager/BackgroundMusic" to="AudioManager" method="backgroundMusicFinished"]
 [connection signal="ammo_changed" from="Player" to="PlayerCamera/HUD" method="setAmmoLabel"]
 [connection signal="player_died" from="Player" to="." method="showGameOver"]
 [connection signal="points_changed" from="Player" to="PlayerCamera/HUD" method="setPointsLabel"]
 [connection signal="points_changed" from="Player" to="PlayerCamera/GameOver" method="setPointsLabel"]
-[connection signal="new_game" from="PlayerCamera/GameOver" to="." method="newGame"]
 [connection signal="new_game" from="PlayerCamera/GameOver" to="." method="hideGameOver"]
+[connection signal="new_game" from="PlayerCamera/GameOver" to="." method="newGame"]
 [connection signal="wave_changed" from="Wave Manager" to="PlayerCamera/HUD" method="setWaveLabel"]
 [connection signal="wave_changed" from="Wave Manager" to="PlayerCamera/GameOver" method="setWaveLabel"]
 [connection signal="enemy_spawned" from="Wave Manager/EnemySpawner" to="Wave Manager" method="enemySpawned"]

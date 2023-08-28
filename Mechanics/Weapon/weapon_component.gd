@@ -5,6 +5,7 @@ signal ammo_changed(current_clip : int, current_ammo : int)
 
 @export var projectile : PackedScene
 @export var ammo_component : Node2D
+@export var cooldown_timer : Timer
 
 @export_category("Config")
 @export var use_time : float = 0 # Seconds
@@ -16,7 +17,6 @@ signal ammo_changed(current_clip : int, current_ammo : int)
 
 var can_attack : bool = true
 
-@onready var cooldown_timer = $Cooldown
 
 func handle_attack(_event : InputEvent, movement_component) -> void:
 	if not can_attack:

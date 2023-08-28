@@ -10,7 +10,7 @@ size = Vector2(31, 20)
 [node name="Drop Component" type="Node2D"]
 script = ExtResource("1_cjka7")
 amount = 4
-drop_chance = 10
+drop_chance = 25
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.06, 0.06)

@@ -1,7 +1,14 @@
 extends Node
 
+@export var background_music : AudioStreamPlayer
+
 
 func playModified(sound : AudioStream, _min_pitch : float = 1.0, _max_pitch : float = 1.0, volume_db : float = 1.0) -> void:
+	
+	if not sound:
+		print("No audio stream!")
+		return
+	
 	# New audio stream
 	var stream = newAudioStream()
 	add_child(stream)
@@ -19,3 +26,7 @@ func playModified(sound : AudioStream, _min_pitch : float = 1.0, _max_pitch : fl
 
 func newAudioStream() -> AudioStreamPlayer:
 	return AudioStreamPlayer.new()
+
+
+func backgroundMusicFinished():
+	background_music.play()
